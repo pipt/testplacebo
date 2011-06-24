@@ -1,5 +1,5 @@
 TestPlacebo = {
-  startTime: new Date(),
+  startTime: null,
 
   init: function() {
     queue = [];
@@ -42,6 +42,10 @@ TestPlacebo = {
     return this;
   },
 
+  start: function() {
+    this.startTime = new Date();
+  },
+
   outputDone: function() {
     queue.push(function() {TestPlacebo._outputDone.apply(window)});
     return this;
@@ -62,16 +66,20 @@ $(document).ready(function() {
     .type('a').waitRandom(0.1, 0.3)
     .type('k').waitRandom(0.1, 0.3)
     .type('e<br/>').wait(2)
-    .type('/usr/bin/ruby -S bundle exec rspec ./spec/units/sweet_sweet_testing.rb<br/>');
+    .type('/usr/bin/ruby -S bundle exec rspec ./spec/units/sweet_sweet_testing.rb<br/>').waitRandom(1, 2)
+    .start();
 
-  for(i = 0; i < 100; i++) {
-    TestPlacebo.waitRandom(0, 0.1).type('.&#8203;');
+  numTests = Math.floor(Math.random() * 30 + 90)
+
+  for(i = 0; i < numTests; i++) {
+    TestPlacebo.waitRandom(0, 0.1).type('.');
   }
 
   TestPlacebo
     .type('<br/>')
     .outputDone()
-    .type('100 examples, 0 failures');
+    .type(numTests + ' examples, 0 failures<br/>').waitRandom(0.5, 1.5)
+    .type('$');
 
   TestPlacebo.run();
 });
