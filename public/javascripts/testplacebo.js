@@ -61,7 +61,7 @@ $(document).ready(function() {
   TestPlacebo.init();
 
   TestPlacebo
-    .type('$ ').waitRandom(2, 4)
+    .type('<span class="prompt">$</span> ').waitRandom(2, 4)
     .type('r').waitRandom(0.1, 0.3)
     .type('a').waitRandom(0.1, 0.3)
     .type('k').waitRandom(0.1, 0.3)
@@ -81,7 +81,7 @@ $(document).ready(function() {
     .outputDone()
     .type(numTests + ' examples, 0 failures<br/>')
     .waitRandom(0.5, 1.5)
-    .type('$');
+    .type('<span class="prompt">$</span>');
 
   TestPlacebo.run();
 });

@@ -3,7 +3,7 @@ body {
 }
 
 .container {
-  background:             black;
+  background-image:       url('../images/background.png');
   position:               absolute;
   top:                    50%;
   left:                   50%;
@@ -20,4 +20,8 @@ body {
   margin:                 20px;
   color:                  #eee;
   font-family:            'Inconsolata', serif;
+}
+
+.prompt {
+  color:                  #00ff00;
 }
