@@ -69,16 +69,18 @@ $(document).ready(function() {
     .type('/usr/bin/ruby -S bundle exec rspec ./spec/units/sweet_sweet_testing.rb<br/>').waitRandom(1, 2)
     .start();
 
-  numTests = Math.floor(Math.random() * 30 + 90)
+  numTests = Math.floor(Math.random() * 30 + 50)
 
   for(i = 0; i < numTests; i++) {
-    TestPlacebo.waitRandom(0, 0.1).type('.');
+    TestPlacebo.waitRandom(0.05, 0.4).type('.');
   }
 
   TestPlacebo
+    .waitRandom(1, 2)
     .type('<br/>')
     .outputDone()
-    .type(numTests + ' examples, 0 failures<br/>').waitRandom(0.5, 1.5)
+    .type(numTests + ' examples, 0 failures<br/>')
+    .waitRandom(0.5, 1.5)
     .type('$');
 
   TestPlacebo.run();
