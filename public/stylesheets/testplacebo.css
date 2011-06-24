@@ -19,7 +19,7 @@ body {
   word-wrap:              break-word;
   margin:                 20px;
   color:                  #eee;
-  font-family:            'Inconsolata', serif;
+  font-family:            'Inconsolata', monospace;
 }
 
 .prompt {
