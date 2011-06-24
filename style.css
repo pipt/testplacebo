@@ -1,0 +1,14 @@
+body {
+  background:             #eee;
+}
+
+.container {
+  position:               absolute;
+  top:                    50%;
+  left:                   50%;
+  margin-top:             -300px;
+  margin-left:            -400px;
+  background:             black;
+  width:                  800px;
+  height:                 600px;
+}
