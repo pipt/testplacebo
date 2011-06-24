@@ -1,4 +1,6 @@
 TestPlacebo = {
+  startTime: new Date(),
+
   init: function() {
     queue = [];
   },
@@ -8,12 +10,11 @@ TestPlacebo = {
     if (action != null) {
       if (typeof(action) == 'function') {
         action();
+        setTimeout(function() {TestPlacebo.run.apply(window);}, 0);
+        return
       } else if (typeof(action) == 'object') {
         if (action.type == 'wait') {
           setTimeout(function() {TestPlacebo.run.apply(window);}, action.seconds * 1000);
-        } else if (action.type == 'waitRandom') {
-          time = (Math.random() * (action.upper - action.lower)) + action.lower;
-          setTimeout(function() {TestPlacebo.run.apply(window);}, time);
         }
         return;
       }
@@ -36,8 +37,19 @@ TestPlacebo = {
   },
 
   waitRandom: function(lower, upper) {
-    queue.push({type: 'waitRandom', lower: lower * 1000, upper: upper * 1000});
+    seconds = (Math.random() * (upper - lower)) + lower;
+    queue.push({type: 'wait', seconds: seconds});
     return this;
+  },
+
+  outputDone: function() {
+    queue.push(function() {TestPlacebo._outputDone.apply(window)});
+    return this;
+  },
+
+  _outputDone: function() {
+    var runTime = (new Date() - TestPlacebo.startTime) / 1000;
+    $('.content').append('Finished in ' + runTime + ' seconds<br/>');
   }
 }
 
@@ -49,11 +61,17 @@ $(document).ready(function() {
     .type('r').waitRandom(0.1, 0.3)
     .type('a').waitRandom(0.1, 0.3)
     .type('k').waitRandom(0.1, 0.3)
-    .type('e<br/>');
+    .type('e<br/>').wait(2)
+    .type('/usr/bin/ruby -S bundle exec rspec ./spec/units/sweet_sweet_testing.rb<br/>');
 
-  for(i = 0; i < 10; i++) {
-    TestPlacebo.waitRandom(0.3, 2).type('.');
+  for(i = 0; i < 100; i++) {
+    TestPlacebo.waitRandom(0, 0.1).type('.&#8203;');
   }
+
+  TestPlacebo
+    .type('<br/>')
+    .outputDone()
+    .type('100 examples, 0 failures');
 
   TestPlacebo.run();
 });
