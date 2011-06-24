@@ -28,7 +28,7 @@ TestPlacebo = {
   },
 
   _type: function(text) {
-    $('.content').append(text);
+    document.getElementById('content').innerHTML += text;
   },
 
   wait: function(seconds) {
@@ -53,11 +53,11 @@ TestPlacebo = {
 
   _outputDone: function() {
     var runTime = (new Date() - TestPlacebo.startTime) / 1000;
-    $('.content').append('Finished in ' + runTime + ' seconds<br/>');
+    TestPlacebo._type('Finished in ' + runTime + ' seconds<br/>');
   }
 }
 
-$(document).ready(function() {
+window.onload = function() {
   TestPlacebo.init();
 
   TestPlacebo
@@ -84,4 +84,4 @@ $(document).ready(function() {
     .type('<span class="prompt">$</span>');
 
   TestPlacebo.run();
-});
+};
