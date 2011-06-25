@@ -1,18 +1,23 @@
 if( typeof(window.OS) === "undefined" ){
   (function(){
     window.OS = {
-      keypress: function(key) {
-        isSpecialKey = OS.handleSpecialKey(key);
-        if (isSpecialKey) { return false };
+      normalKeyPress: function(key) {
         console.log(key);
+        OS.output(String.fromCharCode(key))
       },
 
-      handleSpecialKey: function(key) {
-        if (key == ':space') { return true; }
-        else if (key == ':enter') { return true; }
-        else if (key == ':control-c') { return true; }
-        else if (key == ':backspace') { return true; }
-        return false;
+      output: function(text) {
+        window.Terminal.output(text);
+      },
+
+      specialKeyPress: function(key) {
+        if (key == ':space') {
+          OS.output('&nbsp;');
+          return false;
+        } else if (key == ':enter') { return false; }
+        else if (key == ':control-c') { return false; }
+        else if (key == ':backspace') { return false; }
+        return true;
       }
     }
   })();
