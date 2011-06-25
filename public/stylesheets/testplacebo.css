@@ -18,8 +18,11 @@ body {
 .content {
   word-wrap:              break-word;
   margin:                 20px;
+  height:                 440px;
+  width:                  600px;
   color:                  #eee;
   font-family:            'Inconsolata', monospace;
+  overflow:               hidden;
 }
 
 .prompt {
