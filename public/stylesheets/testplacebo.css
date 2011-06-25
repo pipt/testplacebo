@@ -15,7 +15,7 @@ body {
   border-radius:          8px;
 }
 
-#content {
+.content {
   word-wrap:              break-word;
   margin:                 20px;
   color:                  #eee;
@@ -41,4 +41,8 @@ p.code-link {
 
 .code-link a:hover {
   text-decoration:        underline;
+}
+
+.cursor-off {
+  visibility:             hidden;
 }

@@ -28,7 +28,7 @@ TestPlacebo = {
   },
 
   _type: function(text) {
-    document.getElementById('content').innerHTML += text;
+    document.getElementById('writable').innerHTML += text;
   },
 
   wait: function(seconds) {
@@ -54,6 +54,16 @@ TestPlacebo = {
   _outputDone: function() {
     var runTime = (new Date() - TestPlacebo.startTime) / 1000;
     TestPlacebo._type('Finished in ' + runTime + ' seconds<br/>');
+  },
+
+  cursorOn: function() {
+    $('.cursor').removeClass('cursor-off');
+    setTimeout(TestPlacebo.cursorOff, 600);
+  },
+
+  cursorOff: function() {
+    $('.cursor').addClass('cursor-off');
+    setTimeout(TestPlacebo.cursorOn, 600);
   }
 }
 
@@ -81,7 +91,8 @@ window.onload = function() {
     .outputDone()
     .type(numTests + ' examples, 0 failures<br/>')
     .waitRandom(0.5, 1.5)
-    .type('<span class="prompt">$</span>');
+    .type('<span class="prompt">$</span> ');
 
   TestPlacebo.run();
+  TestPlacebo.cursorOn();
 };
