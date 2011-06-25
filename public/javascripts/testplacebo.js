@@ -146,10 +146,12 @@ $(document).ready(function() {
       TestPlacebo.userType('<br/>');
       if (!TestPlacebo.testRunning) {
         TestPlacebo._type('<span class="prompt">$</span> ');
-      }
-      else if (data.charCode == 8) {
+      } else if (data.charCode == 8) {
         console.log(data.keyCode);
         TestPlacebo.userDel();
+        return false;
+      } else if (data.keyCode == 32) {
+        TestPlacebo.userType('&nbsp;');
         return false;
       }
     }
@@ -160,6 +162,9 @@ $(document).ready(function() {
     if (data.keyCode == 8) {
       console.log(data.keyCode);
       TestPlacebo.userDel();
+      return false;
+    } else if (data.keyCode == 32) {
+      TestPlacebo.userType('&nbsp;');
       return false;
     }
   })
