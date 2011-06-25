@@ -1,6 +1,10 @@
 if( typeof(window.Terminal) === "undefined" ){
   (function(){
     window.Terminal = {
+      init: function() {
+        Terminal.cursorOn();
+      },
+
       output: function(text) {
         $('.writable').append(text);
         $('.content').scrollTo('max');
@@ -8,6 +12,16 @@ if( typeof(window.Terminal) === "undefined" ){
 
       del: function(id) {
         $('#' + id).remove();
+      },
+
+      cursorOn: function() {
+        $('.cursor').removeClass('cursor-off');
+        setTimeout(Terminal.cursorOff, 600);
+      },
+
+      cursorOff: function() {
+        $('.cursor').addClass('cursor-off');
+        setTimeout(Terminal.cursorOn, 600);
       }
     }
   })();
