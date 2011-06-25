@@ -6,7 +6,7 @@ $(document).ready(function() {
   });
 
   $(document).keydown(function(data) {
-    if (data.keyCode == 3) { return OS.specialKeyPress(':control-c')}
+    if (data.keyCode == 67) { return OS.specialKeyPress(':control-c')}
     else if (data.keyCode == 8) { return OS.specialKeyPress(':backspace')}
     else if (data.keyCode == 13) { return OS.specialKeyPress(':enter')}
     else if (data.keyCode == 32) { return OS.specialKeyPress(':space')}

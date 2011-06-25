@@ -3,6 +3,7 @@ if( typeof(window.Terminal) === "undefined" ){
     window.Terminal = {
       output: function(text) {
         $('.writable').append(text);
+        $('.content').scrollTo('max');
       },
 
       del: function(id) {

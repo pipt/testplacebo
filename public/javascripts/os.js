@@ -26,12 +26,25 @@ if( typeof(window.OS) === "undefined" ){
           if (!OS.programRunning) { OS.command += ' '; }
           OS.output(OS.span('&nbsp;', OS.nextUserTextId++));
           return false;
-        } else if (key == ':enter') { return false; }
-        else if (key == ':control-c') { return false; }
-        else if (key == ':backspace') {
+        } else if (key == ':enter') {
+          OS.userText = [];
+          OS.command = '';
+          OS.output('<br/>');
+          if (!OS.programRunning) {
+            OS.output('<span class="prompt">$</span> ');
+          }
+          return false;
+        } else if (key == ':control-c') {
+          OS.userText = [];
+          OS.command = '';
+          OS.output('^C');
+          OS.output('<br/>');
+          OS.output('<span class="prompt">$</span> ');
+          return false;
+        } else if (key == ':backspace') {
           id = OS.userText.pop();
           window.Terminal.del(id);
-          // update command variable
+          OS.command = OS.command.substring(0, OS.command.length - 1);
           return false;
         }
         return true;
