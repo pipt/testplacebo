@@ -25,3 +25,20 @@ body {
 .prompt {
   color:                  #00ff00;
 }
+
+p.code-link {
+  position:               absolute;
+  bottom:                 -40px;
+  width:                  100%;
+  text-align:             center;
+  font-family:            'Terminal Dosis Light', sans-serif;
+}
+
+.code-link a:visited, a:link, a:active {
+  color:                  #888;
+  text-decoration:        none;
+}
+
+.code-link a:hover {
+  text-decoration:        underline;
+}
