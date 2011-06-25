@@ -33,6 +33,7 @@ if( typeof(window.TestPlacebo) === "undefined" ){
       },
 
       _type: function(text) {
+        TestPlacebo.userText = [];
         $('#writable').append(text);
         $('.content').scrollTo('max');
       },
@@ -140,12 +141,13 @@ $(document).ready(function() {
   TestPlacebo.cursorOn();
 
   $(document).keypress(function(data) {
-    if (65 <= data.charCode && data.charCode <= 122) {
+    if (48 <= data.charCode && data.charCode <= 122) {
       TestPlacebo.userType(String.fromCharCode(data.charCode));
     } else if (data.charCode == 13) {
       TestPlacebo.userType('<br/>');
       if (!TestPlacebo.testRunning) {
         TestPlacebo._type('<span class="prompt">$</span> ');
+        TestPlacebo.userText = [];
       } else if (data.charCode == 8) {
         console.log(data.keyCode);
         TestPlacebo.userDel();
