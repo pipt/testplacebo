@@ -6,7 +6,7 @@ if( typeof(window.Terminal) === "undefined" ){
       },
 
       del: function(id) {
-        $(id).remove();
+        $('#' + id).remove();
       }
     }
   })();
