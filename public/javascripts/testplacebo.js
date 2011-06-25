@@ -141,7 +141,7 @@ $(document).ready(function() {
   TestPlacebo.cursorOn();
 
   $(document).keypress(function(data) {
-    if (48 <= data.charCode && data.charCode <= 122) {
+    if (33 <= data.charCode && data.charCode <= 126) {
       TestPlacebo.userType(String.fromCharCode(data.charCode));
     } else if (data.charCode == 13) {
       TestPlacebo.userType('<br/>');
