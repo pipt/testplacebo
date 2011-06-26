@@ -1,7 +1,6 @@
 if( typeof(window.OS) === "undefined" ){
   (function(){
     window.OS = {
-      programRunning: false,
       currentProgram: null,
       command: '',
       userText: [],
@@ -17,7 +16,7 @@ if( typeof(window.OS) === "undefined" ){
             OS.userText = [];
             OS.command = '';
             OS.output('^C');
-            if (OS.programRunning && OS.currentProgram.halt != undefined) {
+            if (OS.currentProgram != null && OS.currentProgram.halt != undefined) {
               OS.currentProgram.halt();
             } else {
               OS.displayPrompt();
@@ -25,7 +24,7 @@ if( typeof(window.OS) === "undefined" ){
           }
         } else {
           OS.userText.push('user-text-' + OS.nextUserTextId);
-          if (!OS.programRunning) { OS.command += String.fromCharCode(key.charCode); }
+          if (OS.currentProgram == null) { OS.command += String.fromCharCode(key.charCode); }
           OS.output(OS.span(String.fromCharCode(key.charCode), OS.nextUserTextId++));
         }
       },
@@ -43,7 +42,7 @@ if( typeof(window.OS) === "undefined" ){
       specialKeyPress: function(key) {
         if (key == ':space') {
           OS.userText.push('user-text-' + OS.nextUserTextId);
-          if (!OS.programRunning) { OS.command += ' '; }
+          if (OS.currentProgram == null) { OS.command += ' '; }
           OS.output(OS.span('&nbsp;', OS.nextUserTextId++));
           return false;
         } else if (key == ':enter') {
@@ -60,7 +59,7 @@ if( typeof(window.OS) === "undefined" ){
 
       enter: function() {
         OS.userText = [];
-        if (!OS.programRunning) {
+        if (OS.currentProgram == null) {
           OS.runProgram();
         }
         OS.command = '';
@@ -74,7 +73,6 @@ if( typeof(window.OS) === "undefined" ){
             OS.output('<br/>Unknown command');
           } else {
             OS.output('<br/>');
-            OS.programRunning = true;
             OS.currentProgram = program;
             if (program.init !== undefined) { program.init(); }
             program.run(parts);
@@ -88,7 +86,6 @@ if( typeof(window.OS) === "undefined" ){
 
       programFinished: function() {
         OS.currentProgram = null;
-        OS.programRunning = false;
         OS.displayPrompt();
       },
 
