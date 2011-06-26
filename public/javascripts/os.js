@@ -103,7 +103,9 @@ if( typeof(window.OS) === "undefined" ){
       replaceCurrentCommand: function(newCommand) {
         OS.command = '';
         while (OS.userText.length > 0) { Terminal.del(OS.userText.pop()); }
-        for (i = 0; i < newCommand.length; i++) { OS.userOutput(newCommand.charAt(i)); }
+        if (newCommand !== undefined) {
+          for (i = 0; i < newCommand.length; i++) { OS.userOutput(newCommand.charAt(i)); }
+        }
       }
     }
   })();
