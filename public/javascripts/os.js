@@ -13,7 +13,7 @@ if( typeof(window.OS) === "undefined" ){
       normalKeyPress: function(key) {
         if (key.ctrlKey) {
           if (String.fromCharCode(key.charCode) == 'c' || String.fromCharCode(key.charCode) == 'C') {
-            OS.clearCurrentInput();
+            OS.clearBackspaceBuffer();
             Terminal.output('^C');
             if (OS.currentProgram != null && OS.currentProgram.halt != undefined) {
               OS.currentProgram.halt();
@@ -29,7 +29,7 @@ if( typeof(window.OS) === "undefined" ){
       },
 
       programOutput: function(text) {
-        OS.clearCurrentInput();
+        OS.clearBackspaceBuffer();
         Terminal.output(text);
       },
 
@@ -54,7 +54,7 @@ if( typeof(window.OS) === "undefined" ){
       enter: function() {
         if (OS.currentProgram == null) { OS.runProgram(); }
         else { Terminal.output('<br/>'); }
-        OS.clearCurrentInput();
+        OS.clearBackspaceBuffer();
       },
 
       runProgram: function() {
@@ -70,7 +70,7 @@ if( typeof(window.OS) === "undefined" ){
             return;
           }
         }
-        OS.clearCurrentInput();
+        OS.clearBackspaceBuffer();
         OS.displayPrompt();
       },
 
@@ -84,7 +84,7 @@ if( typeof(window.OS) === "undefined" ){
         Terminal.output('<span class="prompt">$</span> ');
       },
 
-      clearCurrentInput: function() {
+      clearBackspaceBuffer: function() {
         OS.userText = [];
         OS.command = '';
       }
