@@ -59,6 +59,7 @@ if( typeof(window.OS) === "undefined" ){
 
       runProgram: function() {
         if (OS.command != '') {
+          Programs['history'].previousCommands.push(OS.command);
           var parts = OS.command.split(' ');
           var program = Programs[OS.command] || Programs[parts[0]];
           if (program === undefined) {

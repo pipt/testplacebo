@@ -30,4 +30,13 @@ window.Programs['uname'] = {
     OS.programOutput('UnicornOS 4.04');
     OS.programFinished();
   }
+};
+
+window.Programs['history'] = {
+  previousCommands: [],
+
+  run: function(args) {
+    OS.programOutput(this.previousCommands.join('<br/>'));
+    OS.programFinished();
+  }
 }
