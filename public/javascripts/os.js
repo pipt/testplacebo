@@ -58,7 +58,10 @@ if( typeof(window.OS) === "undefined" ){
           if (OS.currentProgram == null) { OS.replaceCurrentCommand(Programs['history'].nextCommand()); }
           return false;
         } else if (key == ':tab') {
-          if (OS.currentProgram == null) { console.log('tab'); }
+          if (OS.currentProgram == null) {
+            console.log('tab');
+            console.log(Programs.allPrograms());
+          }
           return false;
         }
         return true;
@@ -107,7 +110,7 @@ if( typeof(window.OS) === "undefined" ){
         OS.command = '';
         while (OS.userText.length > 0) { Terminal.del(OS.userText.pop()); }
         if (newCommand !== undefined) {
-          for (i = 0; i < newCommand.length; i++) { OS.userOutput(newCommand.charAt(i)); }
+          for (var i = 0; i < newCommand.length; i++) { OS.userOutput(newCommand.charAt(i)); }
         }
       }
     }

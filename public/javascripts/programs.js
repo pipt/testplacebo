@@ -1,6 +1,14 @@
 if( typeof(window.Programs) === "undefined" ){
   (function(){
-    window.Programs = {};
+    window.Programs = {
+      allPrograms: function() {
+        var programs = []
+        for (var member in Programs) {
+          if (member != 'allPrograms' && !member.match(/ /)) { programs.push(member); }
+        }
+        return programs;
+      }
+    };
   })();
 }
 

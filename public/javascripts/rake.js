@@ -9,7 +9,7 @@ window.Programs['rake'] = {
       .startTimer();
 
     numTests = Math.floor(Math.random() * 5 + 10)
-    for(i = 0; i < numTests; i++) { this.waitRandom(0.05, 0.4).type('.'); }
+    for(var i = 0; i < numTests; i++) { this.waitRandom(0.05, 0.4).type('.'); }
 
     this
       .waitRandom(1, 2)
