@@ -1,6 +1,8 @@
 if (typeof(window.SpecialKeyHandlers) === "undefined") {
   (function() {
     window.SpecialKeyHandlers = {
+      tabAlreadyPressed: false,
+
       handleKey: function(key) {
         if (key == ':space') {
           OS.userText.push('user-text-' + OS.nextUserTextId);
@@ -26,6 +28,17 @@ if (typeof(window.SpecialKeyHandlers) === "undefined") {
             var possible = Programs.possiblePrograms();
             if (possible.length == 1) {
               OS.replaceCurrentCommand(possible[0]);
+            } else if (possible.length > 1) {
+              if (SpecialKeyHandlers.tabAlreadyPressed) {
+                SpecialKeyHandlers.tabAlreadyPressed = false;
+                OS.userText = [];
+                Terminal.output('<br/>');
+                Terminal.output(possible.join(' '));
+                OS.displayPrompt();
+                OS.replaceCurrentCommand(OS.command);
+              } else {
+                SpecialKeyHandlers.tabAlreadyPressed = true;
+              }
             }
           }
           return false;
