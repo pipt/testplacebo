@@ -45,19 +45,22 @@ window.Programs['history'] = {
     if (this.previousCommands[this.previousCommands.length - 1] != command) {
       this.previousCommands.push(command);
     }
-    this.currentCommandPointer = this.previousCommands.length - 1;
+    this.currentCommandPointer = this.previousCommands.length;
   },
 
   previousCommand: function() {
-    if (this.currentCommandPointer >= 0) { return this.previousCommands[this.currentCommandPointer--]; }
+    console.log(this.currentCommandPointer);
+    if (this.currentCommandPointer >= 0) { return this.previousCommands[--this.currentCommandPointer]; }
     return '';
   },
 
   nextCommand: function() {
-    if (this.currentCommandPointer < this.previousCommands.length - 1) {
-      return this.previousCommands[this.currentCommandPointer++];
+    console.log(this.currentCommandPointer);
+    if (this.currentCommandPointer >= this.previousCommands.length) {
+      return '';
+    } else {
+      return this.previousCommands[++this.currentCommandPointer];
     }
-    return '';
   }
 };
 
