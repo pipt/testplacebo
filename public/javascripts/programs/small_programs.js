@@ -44,7 +44,7 @@ window.Programs['uptime'] = {
 
 window.Programs['clear'] = {
   run: function() {
-    $('.writable').html('');
+    Terminal.clear();
     OS.programFinished(false);
   }
 };

@@ -18,6 +18,10 @@ if (typeof(window.Terminal) === "undefined") {
       cursorOff: function() {
         $('.cursor').addClass('cursor-off');
         setTimeout(Terminal.cursorOn, 600);
+      },
+
+      clear: function() {
+        $('.writable').html('');
       }
     }
   })();
