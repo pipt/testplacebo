@@ -67,8 +67,8 @@ if (typeof(window.OS) === "undefined") {
         OS.displayPrompt();
       },
 
-      displayPrompt: function() {
-        Terminal.output('<br/>');
+      displayPrompt: function(newLine) {
+        if (newLine === undefined || newLine) { Terminal.output('<br/>'); }
         Terminal.output('<span class="prompt">$</span> ');
       },
 

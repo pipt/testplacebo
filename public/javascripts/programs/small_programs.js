@@ -41,3 +41,12 @@ window.Programs['uptime'] = {
     OS.programFinished();
   }
 };
+
+window.Programs['clear'] = {
+  run: function() {
+    $('.writable').html('');
+    OS.clearBackspaceBuffer();
+    OS.currentProgram = null;
+    OS.displayPrompt(false);
+  }
+}
