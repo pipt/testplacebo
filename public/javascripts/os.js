@@ -14,7 +14,7 @@ if( typeof(window.OS) === "undefined" ){
         if (key.ctrlKey) {
           if (String.fromCharCode(key.charCode) == 'c' || String.fromCharCode(key.charCode) == 'C') {
             OS.clearCurrentInput();
-            OS.output('^C');
+            Terminal.output('^C');
             if (OS.currentProgram != null && OS.currentProgram.halt != undefined) {
               OS.currentProgram.halt();
             } else {
@@ -24,12 +24,8 @@ if( typeof(window.OS) === "undefined" ){
         } else {
           OS.userText.push('user-text-' + OS.nextUserTextId);
           if (OS.currentProgram == null) { OS.command += String.fromCharCode(key.charCode); }
-          OS.output(OS.span(String.fromCharCode(key.charCode), OS.nextUserTextId++));
+          Terminal.output(OS.span(String.fromCharCode(key.charCode), OS.nextUserTextId++));
         }
-      },
-
-      output: function(text) {
-        Terminal.output(text);
       },
 
       programOutput: function(text) {
@@ -41,7 +37,7 @@ if( typeof(window.OS) === "undefined" ){
         if (key == ':space') {
           OS.userText.push('user-text-' + OS.nextUserTextId);
           if (OS.currentProgram == null) { OS.command += ' '; }
-          OS.output(OS.span('&nbsp;', OS.nextUserTextId++));
+          Terminal.output(OS.span('&nbsp;', OS.nextUserTextId++));
           return false;
         } else if (key == ':enter') {
           OS.enter();
@@ -57,7 +53,7 @@ if( typeof(window.OS) === "undefined" ){
 
       enter: function() {
         if (OS.currentProgram == null) { OS.runProgram(); }
-        else { OS.output('<br/>'); }
+        else { Terminal.output('<br/>'); }
         OS.clearCurrentInput();
       },
 
@@ -66,9 +62,9 @@ if( typeof(window.OS) === "undefined" ){
           var parts = OS.command.split(' ');
           var program = Programs[OS.command] || Programs[parts[0]];
           if (program === undefined) {
-            OS.output('<br/>' + parts[0] + ': command not found');
+            Terminal.output('<br/>' + parts[0] + ': command not found');
           } else {
-            OS.output('<br/>');
+            Terminal.output('<br/>');
             OS.currentProgram = program;
             program.run(parts);
             return;
@@ -84,8 +80,8 @@ if( typeof(window.OS) === "undefined" ){
       },
 
       displayPrompt: function() {
-        OS.output('<br/>');
-        OS.output('<span class="prompt">$</span> ');
+        Terminal.output('<br/>');
+        Terminal.output('<span class="prompt">$</span> ');
       },
 
       clearCurrentInput: function() {
