@@ -2,7 +2,6 @@ if( typeof(window.OS) === "undefined" ){
   (function(){
     window.OS = {
       programRunning: false,
-      controlPressed: false,
       command: '',
       userText: [],
       nextUserTextId: 1,
@@ -12,8 +11,9 @@ if( typeof(window.OS) === "undefined" ){
       },
 
       normalKeyPress: function(key) {
-        if (OS.controlPressed) {
-          if (String.fromCharCode(key) == 'c' || String.fromCharCode(key) == 'C') {
+        console.log(key);
+        if (key.ctrlKey) {
+          if (String.fromCharCode(key.charCode) == 'c' || String.fromCharCode(key.charCode) == 'C') {
             OS.userText = [];
             OS.command = '';
             OS.output('^C');
@@ -22,8 +22,8 @@ if( typeof(window.OS) === "undefined" ){
           }
         } else {
           OS.userText.push('user-text-' + OS.nextUserTextId);
-          if (!OS.programRunning) { OS.command += String.fromCharCode(key); }
-          OS.output(OS.span(String.fromCharCode(key), OS.nextUserTextId++));
+          if (!OS.programRunning) { OS.command += String.fromCharCode(key.charCode); }
+          OS.output(OS.span(String.fromCharCode(key.charCode), OS.nextUserTextId++));
         }
       },
 
