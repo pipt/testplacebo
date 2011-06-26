@@ -12,7 +12,7 @@ if (typeof(window.OS) === "undefined") {
       },
 
       normalKeyPress: function(key) {
-        SpecialKeyHandlers.tabAlreadyPressed = false;
+        KeyHandlers.tabAlreadyPressed = false;
         if (key.ctrlKey) {
           if (String.fromCharCode(key.charCode) == 'c' || String.fromCharCode(key.charCode) == 'C') {
             OS.clearBackspaceBuffer();
