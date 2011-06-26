@@ -74,7 +74,6 @@ if( typeof(window.OS) === "undefined" ){
           } else {
             OS.output('<br/>');
             OS.currentProgram = program;
-            if (program.init !== undefined) { program.init(); }
             program.run(parts);
             return;
           }

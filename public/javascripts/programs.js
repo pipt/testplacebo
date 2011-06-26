@@ -1,33 +1,24 @@
 window.Programs['rake'] = {
-  queue: [],
-  shouldHalt: false,
+  run: function(args) {
+    this.queue = [];
+    this.shouldHalt = false;
 
-  init: function() {
-    self = window.Programs['rake'];
-    self.queue = [];
-    self.shouldHalt = false;
-
-    self
+    this
       .wait(2)
       .type('/usr/bin/ruby -S bundle exec rspec ./spec/units/sweet_sweet_testing.rb<br/>').waitRandom(1, 2)
       .startTimer();
 
     numTests = Math.floor(Math.random() * 5 + 10)
+    for(i = 0; i < numTests; i++) { this.waitRandom(0.05, 0.4).type('.'); }
 
-    for(i = 0; i < numTests; i++) {
-      self.waitRandom(0.05, 0.4).type('.');
-    }
-
-    self
+    this
       .waitRandom(1, 2)
       .type('<br/>')
       .outputDone()
       .type(numTests + ' examples, 0 failures')
       .waitRandom(0.5, 1.5)
       .finish();
-  },
 
-  run: function(args) {
     this.processEvents();
   },
 
