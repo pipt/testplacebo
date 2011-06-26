@@ -71,13 +71,13 @@ if (typeof(window.OS) === "undefined") {
         OS.displayPrompt();
       },
 
-      programFinished: function() {
+      programFinished: function(newLine) {
         if (OS.commandQueue.length > 0) {
           OS.command = OS.commandQueue.shift();
           OS.runProgram();
         } else {
           OS.currentProgram = null;
-          OS.displayPrompt();
+          OS.displayPrompt(newLine);
         }
       },
 

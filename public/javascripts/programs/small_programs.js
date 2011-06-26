@@ -45,8 +45,7 @@ window.Programs['uptime'] = {
 window.Programs['clear'] = {
   run: function() {
     $('.writable').html('');
-    OS.currentProgram = null;
-    OS.displayPrompt(false);
+    OS.programFinished(false);
   }
 };
 
