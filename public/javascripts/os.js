@@ -69,7 +69,6 @@ if( typeof(window.OS) === "undefined" ){
       },
 
       runProgram: function() {
-        OS.programRunning = true;
         if (OS.command != '') {
           var parts = OS.command.split(' ');
           var program = window.Programs[parts[0]];
@@ -77,9 +76,14 @@ if( typeof(window.OS) === "undefined" ){
             OS.output('Unknown command<br/>');
             OS.output('<span class="prompt">$</span> ');
           } else {
+            OS.programRunning = true;
             if (program.init !== undefined) { program.init(); }
             program.run(parts);
           }
+        } else {
+          OS.userText = [];
+          OS.command = '';
+          OS.output('<span class="prompt">$</span> ');
         }
       },
 
