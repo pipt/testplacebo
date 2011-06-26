@@ -20,8 +20,7 @@ if( typeof(window.OS) === "undefined" ){
             if (OS.programRunning && OS.currentProgram.halt != undefined) {
               OS.currentProgram.halt();
             } else {
-              OS.output('<br/>');
-              OS.output('<span class="prompt">$</span> ');
+              OS.displayPrompt();
             }
           }
         } else {
@@ -61,7 +60,6 @@ if( typeof(window.OS) === "undefined" ){
 
       enter: function() {
         OS.userText = [];
-        OS.output('<br/>');
         if (!OS.programRunning) {
           OS.runProgram();
         }
@@ -73,24 +71,28 @@ if( typeof(window.OS) === "undefined" ){
           var parts = OS.command.split(' ');
           var program = Programs[parts[0]];
           if (program === undefined) {
-            OS.output('Unknown command<br/>');
-            OS.output('<span class="prompt">$</span> ');
+            OS.output('<br/>Unknown command');
           } else {
+            OS.output('<br/>');
             OS.programRunning = true;
             OS.currentProgram = program;
             if (program.init !== undefined) { program.init(); }
             program.run(parts);
+            return;
           }
-        } else {
-          OS.userText = [];
-          OS.command = '';
-          OS.output('<span class="prompt">$</span> ');
         }
+        OS.userText = [];
+        OS.command = '';
+        OS.displayPrompt();
       },
 
       programFinished: function() {
         OS.currentProgram = null;
         OS.programRunning = false;
+        OS.displayPrompt();
+      },
+
+      displayPrompt: function() {
         OS.output('<br/>');
         OS.output('<span class="prompt">$</span> ');
       }
