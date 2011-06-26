@@ -17,7 +17,7 @@ if( typeof(window.OS) === "undefined" ){
             OS.userText = [];
             OS.command = '';
             OS.output('^C');
-            if (OS.programRunning) {
+            if (OS.programRunning && OS.currentProgram.halt != undefined) {
               OS.currentProgram.halt();
             } else {
               OS.output('<br/>');
@@ -77,7 +77,7 @@ if( typeof(window.OS) === "undefined" ){
             OS.output('Unknown command<br/>');
             OS.output('<span class="prompt">$</span> ');
           } else {
-            program.init();
+            if (program.init !== undefined) { program.init(); }
             program.run(parts);
           }
         }
