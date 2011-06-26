@@ -16,5 +16,5 @@ $(document).ready(function() {
     else if (data.keyCode == 32) { return OS.specialKeyPress(':space') }
   });
 
-  Terminal.init();
+  Terminal.cursorOn();
 });

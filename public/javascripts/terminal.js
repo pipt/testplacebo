@@ -1,10 +1,6 @@
 if( typeof(window.Terminal) === "undefined" ){
   (function(){
     window.Terminal = {
-      init: function() {
-        Terminal.cursorOn();
-      },
-
       output: function(text) {
         $('.writable').append(text);
         $('.content').scrollTo('max');
