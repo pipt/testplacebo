@@ -7,6 +7,24 @@ window.Programs['rake'] = {
     self.queue = [];
     self.shouldHalt = false;
 
+    self
+      .wait(2)
+      .type('/usr/bin/ruby -S bundle exec rspec ./spec/units/sweet_sweet_testing.rb<br/>').waitRandom(1, 2)
+      .startTimer();
+
+    numTests = Math.floor(Math.random() * 30 + 50)
+
+    for(i = 0; i < numTests; i++) {
+      self.waitRandom(0.05, 0.4).type('.');
+    }
+
+    self
+      .waitRandom(1, 2)
+      .type('<br/>')
+      .outputDone()
+      .type(numTests + ' examples, 0 failures')
+      .waitRandom(0.5, 1.5)
+      .finish();
   },
 
   run: function(args) {
@@ -37,6 +55,43 @@ window.Programs['rake'] = {
       }
     }
     setTimeout(function() {self.processEvents.apply(window);}, 100);
+  },
+
+  type: function(text) {
+    window.Programs['rake'].queue.push(function() { window.OS.programOutput.apply(window, [text]) });
+    return this;
+  },
+
+  wait: function(seconds) {
+    window.Programs['rake'].queue.push({type: 'wait', seconds: seconds});
+    return this;
+  },
+
+  waitRandom: function(lower, upper) {
+    seconds = (Math.random() * (upper - lower)) + lower;
+    window.Programs['rake'].queue.push({ type: 'wait', seconds: seconds });
+    return this;
+  },
+
+  startTimer: function() {
+    window.Programs['rake'].queue.push(function() { window.Programs['rake']._startTimer.apply(window) });
+    return this;
+  },
+
+  _startTimer: function() {
+    window.Programs['rake'].startTime = new Date();
+  },
+
+  outputDone: function() {
+    Programs['rake'].queue.push(function() {
+      var runTime = (new Date() - Programs['rake'].startTime) / 1000;
+      OS.programOutput('Finished in ' + runTime + ' seconds<br/>');
+    });
+    return this;
+  },
+
+  finish: function() {
+    window.Programs['rake'].queue.push(function() { window.Programs['rake'].shouldHalt = true; });
   }
 };
 
