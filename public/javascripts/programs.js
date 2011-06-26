@@ -18,3 +18,21 @@ window.Programs['echo'] = {
     OS.programFinished();
   }
 };
+
+window.Programs['make'] = {
+  run: function(args) {
+    if (args.slice(1).join(' ') == 'me a sandwich') {
+      OS.programOutput('What? Make it yourself.');
+    }
+    OS.programFinished();
+  }
+}
+
+window.Programs['sudo'] = {
+  run: function(args) {
+    if (args.slice(1).join(' ') == 'make me a sandwich') {
+      OS.programOutput('Okay.');
+    }
+    OS.programFinished();
+  }
+}
