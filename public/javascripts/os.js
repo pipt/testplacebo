@@ -43,15 +43,15 @@ if (typeof(window.OS) === "undefined") {
           if (program === undefined) {
             Terminal.output('<br/>' + parts[0] + ': command not found');
             OS.programFinished();
-            return;
           } else {
             Terminal.output('<br/>');
             OS.currentProgram = program;
             program.run(parts);
-            return;
           }
+        } else {
+          Programs['history'].resetCommandPointer();
+          OS.displayPrompt();
         }
-        OS.displayPrompt();
       },
 
       programFinished: function(newLine) {

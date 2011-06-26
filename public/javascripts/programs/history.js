@@ -11,6 +11,10 @@ window.Programs['history'] = {
     if (this.previousCommands[this.previousCommands.length - 1] != command) {
       this.previousCommands.push(command);
     }
+    this.resetCommandPointer();
+  },
+
+  resetCommandPointer: function() {
     this.currentCommandPointer = this.previousCommands.length;
   },
 
