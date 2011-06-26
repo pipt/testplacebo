@@ -45,8 +45,14 @@ window.Programs['uptime'] = {
 window.Programs['clear'] = {
   run: function() {
     $('.writable').html('');
-    OS.clearBackspaceBuffer();
     OS.currentProgram = null;
     OS.displayPrompt(false);
   }
-}
+};
+
+window.Programs['date'] = {
+  run: function() {
+    OS.programOutput(Date());
+    OS.programFinished();
+  }
+};
