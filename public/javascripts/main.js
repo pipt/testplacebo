@@ -14,6 +14,8 @@ $(document).ready(function() {
     if (data.keyCode == 8) { return OS.specialKeyPress(':backspace') }
     else if (data.keyCode == 13) { return OS.specialKeyPress(':enter') }
     else if (data.keyCode == 32) { return OS.specialKeyPress(':space') }
+    else if (data.keyCode == 38) { return OS.specialKeyPress(':up') }
+    else if (data.keyCode == 40) { return OS.specialKeyPress(':down') }
   });
 
   Terminal.cursorOn();

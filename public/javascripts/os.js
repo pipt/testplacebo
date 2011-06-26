@@ -22,15 +22,19 @@ if( typeof(window.OS) === "undefined" ){
             }
           }
         } else {
-          OS.userText.push('user-text-' + OS.nextUserTextId);
-          if (OS.currentProgram == null) { OS.command += String.fromCharCode(key.charCode); }
-          Terminal.output(OS.span(String.fromCharCode(key.charCode), OS.nextUserTextId++));
+          OS.userOutput(String.fromCharCode(key.charCode));
         }
       },
 
       programOutput: function(text) {
         OS.clearBackspaceBuffer();
         Terminal.output(text);
+      },
+
+      userOutput: function(text) {
+        OS.userText.push('user-text-' + OS.nextUserTextId);
+        if (OS.currentProgram == null) { OS.command += text; }
+        Terminal.output(OS.span(text, OS.nextUserTextId++));
       },
 
       specialKeyPress: function(key) {
@@ -47,6 +51,12 @@ if( typeof(window.OS) === "undefined" ){
           Terminal.del(id);
           OS.command = OS.command.substring(0, OS.command.length - 1);
           return false;
+        } else if (key == ':up' && OS.currentProgram == null) {
+          OS.replaceCurrentCommand(Programs['history'].previousCommand());
+          return false;
+        } else if (key == ':down' && OS.currentProgram == null) {
+          OS.replaceCurrentCommand(Programs['history'].nextCommand());
+          return false;
         }
         return true;
       },
@@ -59,7 +69,7 @@ if( typeof(window.OS) === "undefined" ){
 
       runProgram: function() {
         if (OS.command != '') {
-          Programs['history'].previousCommands.push(OS.command);
+          Programs['history'].addCommand(OS.command);
           var parts = OS.command.split(' ');
           var program = Programs[OS.command] || Programs[parts[0]];
           if (program === undefined) {
@@ -88,6 +98,12 @@ if( typeof(window.OS) === "undefined" ){
       clearBackspaceBuffer: function() {
         OS.userText = [];
         OS.command = '';
+      },
+
+      replaceCurrentCommand: function(newCommand) {
+        OS.command = '';
+        while (OS.userText.length > 0) { Terminal.del(OS.userText.pop()); }
+        for (i = 0; i < newCommand.length; i++) { OS.userOutput(newCommand.charAt(i)); }
       }
     }
   })();

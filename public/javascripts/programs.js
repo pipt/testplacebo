@@ -34,9 +34,36 @@ window.Programs['uname'] = {
 
 window.Programs['history'] = {
   previousCommands: [],
+  currentCommandPointer: 0,
 
   run: function(args) {
     OS.programOutput(this.previousCommands.join('<br/>'));
+    OS.programFinished();
+  },
+
+  addCommand: function(command) {
+    if (this.previousCommands[this.previousCommands.length - 1] != command) {
+      this.previousCommands.push(command);
+    }
+    this.currentCommandPointer = this.previousCommands.length - 1;
+  },
+
+  previousCommand: function() {
+    if (this.currentCommandPointer >= 0) { return this.previousCommands[this.currentCommandPointer--]; }
+    return '';
+  },
+
+  nextCommand: function() {
+    if (this.currentCommandPointer < this.previousCommands.length - 1) {
+      return this.previousCommands[this.currentCommandPointer++];
+    }
+    return '';
+  }
+};
+
+window.Programs['whoami'] = {
+  run: function(args) {
+    OS.programOutput('You are a meat popsicle');
     OS.programFinished();
   }
 }
