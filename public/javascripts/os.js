@@ -59,6 +59,8 @@ if (typeof(window.OS) === "undefined") {
           var program = Programs[command] || Programs[parts[0]];
           if (program === undefined) {
             Terminal.output('<br/>' + parts[0] + ': command not found');
+            OS.programFinished();
+            return;
           } else {
             Terminal.output('<br/>');
             OS.currentProgram = program;
@@ -66,7 +68,6 @@ if (typeof(window.OS) === "undefined") {
             return;
           }
         }
-        OS.clearBackspaceBuffer();
         OS.displayPrompt();
       },
 
