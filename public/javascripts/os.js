@@ -11,7 +11,6 @@ if( typeof(window.OS) === "undefined" ){
       },
 
       normalKeyPress: function(key) {
-        console.log(key);
         if (key.ctrlKey) {
           if (String.fromCharCode(key.charCode) == 'c' || String.fromCharCode(key.charCode) == 'C') {
             OS.userText = [];
@@ -67,7 +66,7 @@ if( typeof(window.OS) === "undefined" ){
             OS.output('<span class="prompt">$</span> ');
           } else {
             program.init();
-            program.run();
+            program.run(parts);
           }
         }
       },

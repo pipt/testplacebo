@@ -3,8 +3,9 @@ window.Programs['rake'] = {
 
   },
 
-  run: function() {
-    OS.output('Running rake...');
+  run: function(args) {
+    OS.output('Running rake...<br/>');
+    OS.output(args[1]);
     OS.programFinished();
   }
 };
