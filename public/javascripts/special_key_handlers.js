@@ -23,8 +23,10 @@ if (typeof(window.SpecialKeyHandlers) === "undefined") {
           return false;
         } else if (key == ':tab') {
           if (OS.currentProgram == null) {
-            console.log('tab');
-            console.log(Programs.allPrograms());
+            var possible = Programs.possiblePrograms();
+            if (possible.length == 1) {
+              OS.replaceCurrentCommand(possible[0]);
+            }
           }
           return false;
         }
