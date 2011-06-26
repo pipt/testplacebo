@@ -51,11 +51,14 @@ if( typeof(window.OS) === "undefined" ){
           Terminal.del(id);
           OS.command = OS.command.substring(0, OS.command.length - 1);
           return false;
-        } else if (key == ':up' && OS.currentProgram == null) {
-          OS.replaceCurrentCommand(Programs['history'].previousCommand());
+        } else if (key == ':up') {
+          if (OS.currentProgram == null) { OS.replaceCurrentCommand(Programs['history'].previousCommand()); }
           return false;
-        } else if (key == ':down' && OS.currentProgram == null) {
-          OS.replaceCurrentCommand(Programs['history'].nextCommand());
+        } else if (key == ':down') {
+          if (OS.currentProgram == null) { OS.replaceCurrentCommand(Programs['history'].nextCommand()); }
+          return false;
+        } else if (key == ':tab') {
+          if (OS.currentProgram == null) { console.log('tab'); }
           return false;
         }
         return true;
