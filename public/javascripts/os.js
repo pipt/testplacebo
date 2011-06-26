@@ -69,7 +69,7 @@ if( typeof(window.OS) === "undefined" ){
       runProgram: function() {
         if (OS.command != '') {
           var parts = OS.command.split(' ');
-          var program = Programs[parts[0]];
+          var program = Programs[OS.command] || Programs[parts[0]];
           if (program === undefined) {
             OS.output('<br/>Unknown command');
           } else {

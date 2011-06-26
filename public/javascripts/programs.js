@@ -104,20 +104,16 @@ window.Programs['echo'] = {
   }
 };
 
-window.Programs['make'] = {
+window.Programs['make me a sandwich'] = {
   run: function(args) {
-    if (args.slice(1).join(' ') == 'me a sandwich') {
-      OS.programOutput('What? Make it yourself.');
-    }
+    OS.programOutput('What? Make it yourself.');
     OS.programFinished();
   }
 }
 
-window.Programs['sudo'] = {
+window.Programs['sudo make me a sandwich'] = {
   run: function(args) {
-    if (args.slice(1).join(' ') == 'make me a sandwich') {
-      OS.programOutput('Okay.');
-    }
+    OS.programOutput('Okay.');
     OS.programFinished();
   }
 }
