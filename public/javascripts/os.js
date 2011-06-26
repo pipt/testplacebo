@@ -11,23 +11,6 @@ if (typeof(window.OS) === "undefined") {
         return '<span id="user-text-' + id + '">' + text + '</span>';
       },
 
-      normalKeyPress: function(key) {
-        KeyHandlers.tabAlreadyPressed = false;
-        if (key.ctrlKey) {
-          if (String.fromCharCode(key.charCode) == 'c' || String.fromCharCode(key.charCode) == 'C') {
-            OS.clearBackspaceBuffer();
-            Terminal.output('^C');
-            if (OS.currentProgram != null && OS.currentProgram.halt != undefined) {
-              OS.currentProgram.halt();
-            } else {
-              OS.displayPrompt();
-            }
-          }
-        } else {
-          OS.userOutput(String.fromCharCode(key.charCode));
-        }
-      },
-
       programOutput: function(text) {
         OS.clearBackspaceBuffer();
         Terminal.output(text);

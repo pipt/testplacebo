@@ -4,9 +4,29 @@ if (typeof(window.KeyHandlers) === "undefined") {
       tabAlreadyPressed: false,
       specialKeys: {},
 
-      handleKey: function(key) {
-        if (KeyHandlers.specialKeys[key] !== undefined) { return KeyHandlers.specialKeys[key](); }
+      handleSpecialKey: function(key) {
+        if (KeyHandlers.specialKeys[key.keyCode] !== undefined) { return KeyHandlers.specialKeys[key.keyCode](); }
         return true;
+      },
+
+      handleNormalKey: function(key) {
+        KeyHandlers.tabAlreadyPressed = false;
+        if (key.charCode == 3) { key.charCode = 67; }
+        if (33 <= key.charCode && key.charCode <= 126) {
+          if (key.ctrlKey) {
+            if (String.fromCharCode(key.charCode) == 'c' || String.fromCharCode(key.charCode) == 'C') {
+              OS.clearBackspaceBuffer();
+              Terminal.output('^C');
+              if (OS.currentProgram != null && OS.currentProgram.halt != undefined) {
+                OS.currentProgram.halt();
+              } else {
+                OS.displayPrompt();
+              }
+            }
+          } else {
+            OS.userOutput(String.fromCharCode(key.charCode));
+          }
+        }
       }
     };
 
