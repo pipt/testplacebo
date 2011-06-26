@@ -12,7 +12,7 @@ window.Programs['rake'] = {
       .type('/usr/bin/ruby -S bundle exec rspec ./spec/units/sweet_sweet_testing.rb<br/>').waitRandom(1, 2)
       .startTimer();
 
-    numTests = Math.floor(Math.random() * 30 + 50)
+    numTests = Math.floor(Math.random() * 5 + 10)
 
     for(i = 0; i < numTests; i++) {
       self.waitRandom(0.05, 0.4).type('.');
@@ -32,13 +32,13 @@ window.Programs['rake'] = {
   },
 
   halt: function() {
-    window.Programs['rake'].shouldHalt = true;
+    Programs['rake'].shouldHalt = true;
   },
 
   processEvents: function() {
-    self = window.Programs['rake'];
+    self = Programs['rake'];
     if (self.shouldHalt) {
-      window.OS.programFinished();
+      OS.programFinished();
       return
     }
     action = self.queue.shift();
@@ -60,32 +60,28 @@ window.Programs['rake'] = {
         return;
       }
     }
-    setTimeout(function() {self.processEvents.apply(window);}, 100);
+    setTimeout(function() { self.processEvents(); }, 100);
   },
 
   type: function(text) {
-    window.Programs['rake'].queue.push(function() { window.OS.programOutput.apply(window, [text]) });
+    Programs['rake'].queue.push(function() { OS.programOutput(text) });
     return this;
   },
 
   wait: function(seconds) {
-    window.Programs['rake'].queue.push({ type: 'wait', milliseconds: seconds * 1000 });
+    Programs['rake'].queue.push({ type: 'wait', milliseconds: seconds * 1000 });
     return this;
   },
 
   waitRandom: function(lower, upper) {
     seconds = (Math.random() * (upper - lower)) + lower;
-    window.Programs['rake'].queue.push({ type: 'wait', milliseconds: seconds * 1000 });
+    Programs['rake'].queue.push({ type: 'wait', milliseconds: seconds * 1000 });
     return this;
   },
 
   startTimer: function() {
-    window.Programs['rake'].queue.push(function() { window.Programs['rake']._startTimer.apply(window) });
+    Programs['rake'].queue.push(function() { Programs['rake'].startTime = new Date(); });
     return this;
-  },
-
-  _startTimer: function() {
-    window.Programs['rake'].startTime = new Date();
   },
 
   outputDone: function() {
@@ -97,7 +93,7 @@ window.Programs['rake'] = {
   },
 
   finish: function() {
-    window.Programs['rake'].queue.push(function() { window.Programs['rake'].shouldHalt = true; });
+    Programs['rake'].queue.push(function() { Programs['rake'].shouldHalt = true; });
   }
 };
 
