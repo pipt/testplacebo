@@ -47,7 +47,7 @@ if (typeof(window.OS) === "undefined") {
           OS.enter();
           return false;
         } else if (key == ':backspace') {
-          id = OS.userText.pop();
+          var id = OS.userText.pop();
           Terminal.del(id);
           OS.command = OS.command.substring(0, OS.command.length - 1);
           return false;
