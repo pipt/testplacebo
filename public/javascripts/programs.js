@@ -87,3 +87,12 @@ window.Programs['whoami'] = {
     OS.programFinished();
   }
 };
+
+window.Programs['uptime'] = {
+  bootTime: Date(),
+
+  run: function() {
+    OS.programOutput('Running since ' + Programs['uptime'].bootTime);
+    OS.programFinished();
+  }
+};
