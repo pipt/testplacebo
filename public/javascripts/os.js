@@ -5,6 +5,7 @@ if (typeof(window.OS) === "undefined") {
       command: '',
       userText: [],
       nextUserTextId: 1,
+      commandQueue: [],
 
       span: function(text, id) {
         return '<span id="user-text-' + id + '">' + text + '</span>';
@@ -46,9 +47,16 @@ if (typeof(window.OS) === "undefined") {
 
       runProgram: function() {
         if (OS.command != '') {
-          Programs['history'].addCommand(OS.command);
-          var parts = OS.command.split(' ');
-          var program = Programs[OS.command] || Programs[parts[0]];
+          var commands = OS.command.split('&&');
+          if (commands.length > 1) {
+            OS.commandQueue = commands.slice(1);
+            var command = OS.trimCommand(commands[0]);
+          } else {
+            var command = OS.trimCommand(OS.command);
+          }
+          Programs['history'].addCommand(command);
+          var parts = command.split(' ');
+          var program = Programs[command] || Programs[parts[0]];
           if (program === undefined) {
             Terminal.output('<br/>' + parts[0] + ': command not found');
           } else {
@@ -63,8 +71,13 @@ if (typeof(window.OS) === "undefined") {
       },
 
       programFinished: function() {
-        OS.currentProgram = null;
-        OS.displayPrompt();
+        if (OS.commandQueue.length > 0) {
+          OS.command = OS.commandQueue.shift();
+          OS.runProgram();
+        } else {
+          OS.currentProgram = null;
+          OS.displayPrompt();
+        }
       },
 
       displayPrompt: function(newLine) {
@@ -83,6 +96,10 @@ if (typeof(window.OS) === "undefined") {
         if (newCommand !== undefined) {
           for (var i = 0; i < newCommand.length; i++) { OS.userOutput(newCommand.charAt(i)); }
         }
+      },
+
+      trimCommand: function(command) {
+        return command.replace(/^\s*/, '').replace(/\s*$/, '');
       }
     }
   })();
