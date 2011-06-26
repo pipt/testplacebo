@@ -1,5 +1,5 @@
-if( typeof(window.Programs) === "undefined" ){
-  (function(){
+if (typeof(window.Programs) === "undefined") {
+  (function() {
     window.Programs = {
       allPrograms: function() {
         var programs = []

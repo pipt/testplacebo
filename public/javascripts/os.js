@@ -1,5 +1,5 @@
-if( typeof(window.OS) === "undefined" ){
-  (function(){
+if (typeof(window.OS) === "undefined") {
+  (function() {
     window.OS = {
       currentProgram: null,
       command: '',

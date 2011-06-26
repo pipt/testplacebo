@@ -1,5 +1,5 @@
-if( typeof(window.Terminal) === "undefined" ){
-  (function(){
+if (typeof(window.Terminal) === "undefined") {
+  (function() {
     window.Terminal = {
       output: function(text) {
         $('.writable').append(text);
