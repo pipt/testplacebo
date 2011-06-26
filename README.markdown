@@ -7,9 +7,9 @@ For these times, there's Test Placebo. Experience the buzz of a clean test run w
 
 ## Setup
 
-  git clone git://github.com/pipt/testplacebo.git
-  cd testplacebo
-  bundle
-  rackup
+    git clone git://github.com/pipt/testplacebo.git
+    cd testplacebo
+    bundle
+    rackup
 
 Then just navigate to http://localhost:9292 to use.
