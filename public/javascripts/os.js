@@ -59,9 +59,8 @@ if( typeof(window.OS) === "undefined" ){
 
       enter: function() {
         OS.userText = [];
-        if (OS.currentProgram == null) {
-          OS.runProgram();
-        }
+        if (OS.currentProgram == null) { OS.runProgram(); }
+        else { OS.output('<br/>'); }
         OS.command = '';
       },
 
