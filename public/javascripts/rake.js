@@ -27,7 +27,7 @@ window.Programs['rake'] = {
   },
 
   processEvents: function() {
-    self = Programs['rake'];
+    var self = Programs['rake'];
     if (self.shouldHalt) {
       OS.programFinished();
       return
