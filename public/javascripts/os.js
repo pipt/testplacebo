@@ -66,7 +66,7 @@ if( typeof(window.OS) === "undefined" ){
           var parts = OS.command.split(' ');
           var program = Programs[OS.command] || Programs[parts[0]];
           if (program === undefined) {
-            OS.output('<br/>Unknown command');
+            OS.output('<br/>' + parts[0] + ': command not found');
           } else {
             OS.output('<br/>');
             OS.currentProgram = program;
