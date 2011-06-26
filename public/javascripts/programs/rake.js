@@ -85,9 +85,7 @@ window.Programs['rake'] = {
   },
 
   waitRandom: function(lower, upper) {
-    seconds = (Math.random() * (upper - lower)) + lower;
-    Programs['rake'].queue.push({ type: 'wait', milliseconds: seconds * 1000 });
-    return this;
+    return Programs['rake'].wait((Math.random() * (upper - lower)) + lower);
   },
 
   startTimer: function() {
