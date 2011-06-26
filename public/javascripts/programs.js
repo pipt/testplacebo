@@ -1,3 +1,9 @@
+if( typeof(window.Programs) === "undefined" ){
+  (function(){
+    window.Programs = {};
+  })();
+}
+
 window.Programs['rake'] = {
   run: function(args) {
     this.queue = [];

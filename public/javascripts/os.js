@@ -95,9 +95,3 @@ if( typeof(window.OS) === "undefined" ){
     }
   })();
 }
-
-if( typeof(window.Programs) === "undefined" ){
-  (function(){
-    window.Programs = {};
-  })();
-}
