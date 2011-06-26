@@ -13,8 +13,7 @@ if( typeof(window.OS) === "undefined" ){
       normalKeyPress: function(key) {
         if (key.ctrlKey) {
           if (String.fromCharCode(key.charCode) == 'c' || String.fromCharCode(key.charCode) == 'C') {
-            OS.userText = [];
-            OS.command = '';
+            OS.clearCurrentInput();
             OS.output('^C');
             if (OS.currentProgram != null && OS.currentProgram.halt != undefined) {
               OS.currentProgram.halt();
@@ -34,8 +33,7 @@ if( typeof(window.OS) === "undefined" ){
       },
 
       programOutput: function(text) {
-        OS.userText = [];
-        OS.command = '';
+        OS.clearCurrentInput();
         Terminal.output(text);
       },
 
@@ -58,10 +56,9 @@ if( typeof(window.OS) === "undefined" ){
       },
 
       enter: function() {
-        OS.userText = [];
         if (OS.currentProgram == null) { OS.runProgram(); }
         else { OS.output('<br/>'); }
-        OS.command = '';
+        OS.clearCurrentInput();
       },
 
       runProgram: function() {
@@ -77,8 +74,7 @@ if( typeof(window.OS) === "undefined" ){
             return;
           }
         }
-        OS.userText = [];
-        OS.command = '';
+        OS.clearCurrentInput();
         OS.displayPrompt();
       },
 
@@ -90,6 +86,11 @@ if( typeof(window.OS) === "undefined" ){
       displayPrompt: function() {
         OS.output('<br/>');
         OS.output('<span class="prompt">$</span> ');
+      },
+
+      clearCurrentInput: function() {
+        OS.userText = [];
+        OS.command = '';
       }
     }
   })();
