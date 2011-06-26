@@ -81,4 +81,4 @@ window.KeyHandlers.specialKeys[38] = function() { // up
 window.KeyHandlers.specialKeys[40] = function() { // down
   if (OS.currentProgram == null) { OS.replaceCurrentCommand(Programs['history'].nextCommand()); }
   return false;
-}
+};
