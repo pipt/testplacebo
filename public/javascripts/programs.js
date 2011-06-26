@@ -1,14 +1,42 @@
 window.Programs['rake'] = {
+  queue: [],
+  shouldHalt: false,
+
   init: function() {
+    self = window.Programs['rake'];
+    self.queue = [];
+    self.shouldHalt = false;
+
   },
 
   run: function(args) {
-    OS.programOutput('Running rake...<br/>');
-    OS.programOutput(args[1]);
-    OS.programFinished();
+    this.processEvents();
   },
 
   halt: function() {
+    window.Programs['rake'].shouldHalt = true;
+  },
+
+  processEvents: function() {
+    self = window.Programs['rake'];
+    if (self.shouldHalt) {
+      window.OS.programFinished();
+      return
+    }
+    action = self.queue.shift();
+    if (action != null) {
+      if (typeof(action) == 'function') {
+        action();
+        setTimeout(function() { self.processEvents(); }, 0);
+        return
+      } else if (typeof(action) == 'object') {
+        if (action.type == 'wait') {
+          setTimeout(function() { self.processEvents(); }, action.seconds * 1000);
+        }
+        return;
+      }
+    }
+    setTimeout(function() {self.processEvents.apply(window);}, 100);
   }
 };
 

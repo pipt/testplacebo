@@ -77,6 +77,7 @@ if( typeof(window.OS) === "undefined" ){
             OS.output('<span class="prompt">$</span> ');
           } else {
             OS.programRunning = true;
+            OS.currentProgram = program;
             if (program.init !== undefined) { program.init(); }
             program.run(parts);
           }
@@ -88,6 +89,7 @@ if( typeof(window.OS) === "undefined" ){
       },
 
       programFinished: function() {
+        OS.currentProgram = null;
         OS.programRunning = false;
         OS.output('<br/>');
         OS.output('<span class="prompt">$</span> ');
