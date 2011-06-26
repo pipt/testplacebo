@@ -14,8 +14,16 @@ window.Programs['rake'] = {
       .type('/usr/bin/ruby -S bundle exec rspec ./spec/units/sweet_sweet_testing.rb<br/>').waitRandom(1, 2)
       .startTimer();
 
-    if (args.length == 2 && !isNaN(args[1]) && args[1] > 0) { numTests = args[1]; }
-    else { numTests = Math.floor(Math.random() * 5 + 10); }
+    if (args.length == 2 && !isNaN(args[1]) && args[1] > 0) {
+      numTests = args[1];
+      if (numTests > 9999) {
+        OS.programOutput("It's probably a bad idea to run that many tests...");
+        OS.programFinished();
+        return;
+      }
+    } else {
+      numTests = Math.floor(Math.random() * 5 + 10);
+    }
     for(var i = 0; i < numTests; i++) { this.waitRandom(0.05, 0.4).type('.'); }
 
     this
