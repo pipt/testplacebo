@@ -32,13 +32,13 @@ if( typeof(window.OS) === "undefined" ){
       },
 
       output: function(text) {
-        window.Terminal.output(text);
+        Terminal.output(text);
       },
 
       programOutput: function(text) {
         OS.userText = [];
         OS.command = '';
-        window.Terminal.output(text);
+        Terminal.output(text);
       },
 
       specialKeyPress: function(key) {
@@ -52,7 +52,7 @@ if( typeof(window.OS) === "undefined" ){
           return false;
         } else if (key == ':backspace') {
           id = OS.userText.pop();
-          window.Terminal.del(id);
+          Terminal.del(id);
           OS.command = OS.command.substring(0, OS.command.length - 1);
           return false;
         }
@@ -71,7 +71,7 @@ if( typeof(window.OS) === "undefined" ){
       runProgram: function() {
         if (OS.command != '') {
           var parts = OS.command.split(' ');
-          var program = window.Programs[parts[0]];
+          var program = Programs[parts[0]];
           if (program === undefined) {
             OS.output('Unknown command<br/>');
             OS.output('<span class="prompt">$</span> ');
