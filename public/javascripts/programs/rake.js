@@ -3,6 +3,12 @@ window.Programs['rake'] = {
     this.queue = [];
     this.shouldHalt = false;
 
+    if (args.length == 2 && (args[1] == '-h' || args[1] == '--help')) {
+      this.outputHelp();
+      OS.programFinished();
+      return;
+    }
+
     this
       .wait(2)
       .type('/usr/bin/ruby -S bundle exec rspec ./spec/units/sweet_sweet_testing.rb<br/>').waitRandom(1, 2)
@@ -21,6 +27,11 @@ window.Programs['rake'] = {
       .finish();
 
     this.processEvents();
+  },
+
+  outputHelp: function() {
+    OS.programOutput('rake : run a random number of tests<br/>');
+    OS.programOutput('rake num_tests : run the given number of tests');
   },
 
   halt: function() {
