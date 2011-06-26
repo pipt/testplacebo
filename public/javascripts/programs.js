@@ -49,7 +49,13 @@ window.Programs['rake'] = {
         return
       } else if (typeof(action) == 'object') {
         if (action.type == 'wait') {
-          setTimeout(function() { self.processEvents(); }, action.seconds * 1000);
+          if (action.milliseconds < 100) {
+            setTimeout(function() { self.processEvents(); }, action.milliseconds);
+          } else {
+            action.milliseconds -= 100;
+            self.queue.unshift(action);
+            setTimeout(function() { self.processEvents(); }, 100);
+          }
         }
         return;
       }
@@ -63,13 +69,13 @@ window.Programs['rake'] = {
   },
 
   wait: function(seconds) {
-    window.Programs['rake'].queue.push({type: 'wait', seconds: seconds});
+    window.Programs['rake'].queue.push({ type: 'wait', milliseconds: seconds * 1000 });
     return this;
   },
 
   waitRandom: function(lower, upper) {
     seconds = (Math.random() * (upper - lower)) + lower;
-    window.Programs['rake'].queue.push({ type: 'wait', seconds: seconds });
+    window.Programs['rake'].queue.push({ type: 'wait', milliseconds: seconds * 1000 });
     return this;
   },
 
