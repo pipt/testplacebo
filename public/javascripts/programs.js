@@ -12,21 +12,21 @@ window.Programs['echo'] = {
 };
 
 window.Programs['make me a sandwich'] = {
-  run: function(args) {
+  run: function() {
     OS.programOutput('What? Make it yourself.');
     OS.programFinished();
   }
 };
 
 window.Programs['sudo make me a sandwich'] = {
-  run: function(args) {
+  run: function() {
     OS.programOutput('Okay.');
     OS.programFinished();
   }
 };
 
 window.Programs['uname'] = {
-  run: function(args) {
+  run: function() {
     OS.programOutput('UnicornOS 4.04');
     OS.programFinished();
   }
@@ -36,7 +36,7 @@ window.Programs['history'] = {
   previousCommands: [],
   currentCommandPointer: 0,
 
-  run: function(args) {
+  run: function() {
     OS.programOutput(this.previousCommands.join('<br/>'));
     OS.programFinished();
   },
@@ -49,13 +49,11 @@ window.Programs['history'] = {
   },
 
   previousCommand: function() {
-    console.log(this.currentCommandPointer);
     if (this.currentCommandPointer >= 0) { return this.previousCommands[--this.currentCommandPointer]; }
     return '';
   },
 
   nextCommand: function() {
-    console.log(this.currentCommandPointer);
     if (this.currentCommandPointer >= this.previousCommands.length) {
       return '';
     } else {
@@ -65,8 +63,8 @@ window.Programs['history'] = {
 };
 
 window.Programs['whoami'] = {
-  run: function(args) {
+  run: function() {
     OS.programOutput('You are a meat popsicle');
     OS.programFinished();
   }
-}
+};
