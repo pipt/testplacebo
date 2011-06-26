@@ -1,10 +1,9 @@
-window.Programs['rake'] = {
+window.Programs['echo'] = {
   init: function() {
   },
 
   run: function(args) {
-    OS.programOutput('Running rake...<br/>');
-    OS.programOutput(args[1]);
+    OS.programOutput(args.slice(1).join('&nbsp;'));
     OS.programFinished();
   },
 

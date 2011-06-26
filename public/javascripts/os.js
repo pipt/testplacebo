@@ -2,6 +2,7 @@ if( typeof(window.OS) === "undefined" ){
   (function(){
     window.OS = {
       programRunning: false,
+      currentProgram: null,
       command: '',
       userText: [],
       nextUserTextId: 1,
@@ -16,8 +17,12 @@ if( typeof(window.OS) === "undefined" ){
             OS.userText = [];
             OS.command = '';
             OS.output('^C');
-            OS.output('<br/>');
-            OS.output('<span class="prompt">$</span> ');
+            if (OS.programRunning) {
+              OS.currentProgram.halt();
+            } else {
+              OS.output('<br/>');
+              OS.output('<span class="prompt">$</span> ');
+            }
           }
         } else {
           OS.userText.push('user-text-' + OS.nextUserTextId);
@@ -27,6 +32,12 @@ if( typeof(window.OS) === "undefined" ){
       },
 
       output: function(text) {
+        window.Terminal.output(text);
+      },
+
+      programOutput: function(text) {
+        OS.userText = [];
+        OS.command = '';
         window.Terminal.output(text);
       },
 
@@ -58,6 +69,7 @@ if( typeof(window.OS) === "undefined" ){
       },
 
       runProgram: function() {
+        OS.programRunning = true;
         if (OS.command != '') {
           var parts = OS.command.split(' ');
           var program = window.Programs[parts[0]];
@@ -72,6 +84,7 @@ if( typeof(window.OS) === "undefined" ){
       },
 
       programFinished: function() {
+        OS.programRunning = false;
         OS.output('<br/>');
         OS.output('<span class="prompt">$</span> ');
       }
