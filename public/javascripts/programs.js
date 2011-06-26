@@ -16,11 +16,18 @@ window.Programs['make me a sandwich'] = {
     OS.programOutput('What? Make it yourself.');
     OS.programFinished();
   }
-}
+};
 
 window.Programs['sudo make me a sandwich'] = {
   run: function(args) {
     OS.programOutput('Okay.');
+    OS.programFinished();
+  }
+};
+
+window.Programs['uname'] = {
+  run: function(args) {
+    OS.programOutput('UnicornOS 4.04');
     OS.programFinished();
   }
 }
