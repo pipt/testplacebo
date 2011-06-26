@@ -8,7 +8,7 @@ if (typeof(window.Programs) === "undefined") {
             programs.push(member);
           }
         }
-        return programs;
+        return programs.sort();
       },
 
       possiblePrograms: function() {
@@ -17,7 +17,7 @@ if (typeof(window.Programs) === "undefined") {
         for (var i = 0; i < all.length; i++) {
           if (all[i].substring(0, OS.command.length) == OS.command) { possible.push(all[i]); }
         }
-        return possible;
+        return possible.sort();
       }
     };
   })();
