@@ -3,7 +3,7 @@
 ## Ridiculousness. In JavaScript
 
 Sometimes you want to watch the soothing dots of a flawless test run, but your tests are in a mess.
-For these times, there's [Test Placebo](http://testplacebo.com). Experience the buzz of a clean test run without the mess of any actual tests.
+For these times, there's [Test Placebo](http://testplacebo.pipt.me). Experience the buzz of a clean test run without the mess of any actual tests.
 
 ## Setup
 
